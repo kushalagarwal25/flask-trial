@@ -1,0 +1,25 @@
+from flask import Flask, render_template, redirect, request
+
+# __name__ = __main__
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+	return render_template("index.html")
+
+@app.route('/about')
+def about():
+	return "<h1>About Page</h1>"
+
+@app.route('/home')
+def home():
+	return redirect('/')
+
+@app.route('/submit',methods = ['POST'])
+def submit():
+	if request.method == 'POST':
+		name = request.form['username']
+	return "<h1> hello {}".format(name)
+
+if __name__ == '__main__':
+	app.run(debug=True)
